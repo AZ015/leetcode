@@ -23,12 +23,23 @@ func (q *Queue[T]) Push(value T) {
 }
 
 func (q *Queue[T]) Pop() T {
-	first := q.queue[0]
-	q.queue = q.queue[1:]
+	first := q.queue[len(q.queue)-1]
+	q.queue = q.queue[:len(q.queue)-1]
 
 	return first
 }
 
-func (q *Queue[T]) Peek() T {
+func (q *Queue[T]) PopLeft() T {
+	last := q.queue[0]
+	q.queue = q.queue[1:]
+
+	return last
+}
+
+func (q *Queue[T]) Front() T {
 	return q.queue[0]
+}
+
+func (q *Queue[T]) Back() T {
+	return q.queue[len(q.queue)-1]
 }
